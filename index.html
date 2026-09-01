@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Tasks</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="top-bar">
+      <div class="title-group">
+        <h1 class="app-title">My Tasks</h1>
+        <span class="remaining-badge" id="remaining-badge">0개 남음</span>
+      </div>
+      <label class="theme-toggle" title="다크 모드 전환 (Alt+D)">
+        <input type="checkbox" id="theme-toggle-input" aria-label="다크 모드 전환" />
+        <span class="theme-toggle-slider"></span>
+      </label>
+    </div>
+
+    <div class="dashboard">
+      <div class="quote-of-day" id="quote-of-day"></div>
+
+      <div class="dashboard-overall">
+        <span id="overall-count" class="overall-count">0/0 완료 (0%)</span>
+        <div
+          class="progress-track"
+          id="overall-progress-track"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          aria-label="전체 진행률"
+        >
+          <div class="progress-fill" id="overall-progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="category-stats" id="category-stats"></div>
+
+      <div class="today-count">오늘 추가된 할 일: <strong id="today-count">0</strong>개</div>
+
+      <div class="encouragement" id="encouragement-message" aria-live="polite"></div>
+    </div>
+
+    <div class="data-toolbar">
+      <button id="export-btn" class="toolbar-btn" type="button">내보내기</button>
+      <button id="import-btn" class="toolbar-btn" type="button">가져오기</button>
+      <input type="file" id="import-file-input" accept="application/json" hidden />
+
+      <label class="sort-label" for="sort-select">정렬</label>
+      <select id="sort-select" class="toolbar-select" aria-label="정렬 방식 선택">
+        <option value="completed">완료 상태순</option>
+        <option value="created">생성일순</option>
+        <option value="category">카테고리순</option>
+        <option value="manual">직접 정렬 (드래그)</option>
+      </select>
+    </div>
+
+    <div class="search-bar">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="할 일 검색... (Alt+N: 입력창 포커스)"
+        aria-label="할 일 검색"
+        autocomplete="off"
+      />
+    </div>
+
+    <div class="input-area">
+      <input
+        type="text"
+        id="task-input"
+        placeholder="할 일을 입력하세요"
+        aria-label="새 할 일 입력"
+        autocomplete="off"
+      />
+      <select id="category-select" aria-label="새 할 일의 카테고리">
+        <option value="work">업무</option>
+        <option value="personal">개인</option>
+        <option value="study">공부</option>
+      </select>
+      <button id="add-btn" type="button">추가</button>
+    </div>
+
+    <div class="list-toolbar">
+      <div class="filter-bar" id="filter-bar" role="group" aria-label="카테고리 필터">
+        <button class="filter-btn" data-filter="all" aria-pressed="true">전체</button>
+        <button class="filter-btn" data-filter="work" aria-pressed="false">업무</button>
+        <button class="filter-btn" data-filter="personal" aria-pressed="false">개인</button>
+        <button class="filter-btn" data-filter="study" aria-pressed="false">공부</button>
+      </div>
+      <button id="clear-completed-btn" class="clear-completed-btn" type="button">완료 항목 삭제</button>
+    </div>
+
+    <ul id="task-list" class="task-list" aria-label="할 일 목록"></ul>
+  </div>
+
+  <div id="undo-toast" class="undo-toast" role="status" aria-live="polite" hidden>
+    <span id="undo-toast-text"></span>
+    <button id="undo-btn" class="undo-btn" type="button">실행 취소</button>
+  </div>
+
+  <div id="sr-announcer" class="sr-only" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
